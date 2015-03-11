@@ -8,14 +8,16 @@ class Template {
     this.template = template;
   }
 
-  setTemplatePath(templatePath = '') {
+  setTemplatePath(p = '') {
 
-    if (!fs.existsSync(path.resolve(templatePath))) {
-      console.error(`${templatePath} does not exist`);
+    let absolutePath = path.resolve(p);
+
+    if (!fs.existsSync(absolutePath)) {
+      console.error(`${p} does not exist`);
       return;
     }
 
-    let buffer = fs.readFileSync(path.resolve(templatePath), {
+    let buffer = fs.readFileSync(absolutePath, {
       encoding: 'utf8'
     });
     
@@ -28,3 +30,20 @@ class Template {
 }
 
 module.exports = Template;
+
+/*
+[
+  {
+    "key": "key1",
+    "value": {
+      "selector": ".foo"
+    }
+  }, {
+    "key": "key2",
+    "value": {
+      "selector": ".bar",
+      "attr": "src"
+    }
+  }
+]
+*/

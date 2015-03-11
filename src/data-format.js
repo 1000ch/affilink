@@ -5,19 +5,20 @@ const cheerio = require('cheerio');
 class DataFormat {
 
   constructor(html = '') {
-
     this.$ = cheerio.load(html);
     this.extractDefinition = new Map();
   }
   
-  setDefinitionPath(definitionPath) {
+  setDefinitionPath(p = '') {
 
-    if (!fs.existsSync(path.resolve(definitionPath))) {
-      console.error(`${definitionPath} does not exist`);
+    let absolutePath = path.resolve(p);
+
+    if (!fs.existsSync(absolutePath)) {
+      console.error(`${p} does not exist`);
       return;
     }
 
-    let buffer = fs.readFileSync(path.resolve(definitionPath), {
+    let buffer = fs.readFileSync(absolutePath, {
       encoding: 'utf8'
     });
 
@@ -37,10 +38,11 @@ class DataFormat {
   extract() {
     
     let object = {};
+    let entries = this.extractDefinition.entries();
     
-    for (let [key, value] of this.extractDefinition.entries()) {
-      let element = this.$(value.selector);
-      object[key] = value.attr ? element.attr(value.attr) : element.text();
+    for (let [key, value] of entries) {
+      let $element = this.$(value.selector);
+      object[key] = value.attr ? $element.attr(value.attr) : $element.text();
     }
     
     return object;

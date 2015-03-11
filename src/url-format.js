@@ -9,15 +9,18 @@ class URLFormat {
     if (!validUrl.isUri(url)) {
       console.error(`${url} is invalid URL`)
     }
-    
+
+    // parse url & querystring
     this.url = URL.parse(url);
     this.qs = querystring.parse(url.search);
   }
 
   addQueryString(key = '', value = '') {
-    
+
+    // add querystring
     this.qs[key] = value;
 
+    // update querystring
     this.url.search = querystring.stringify(this.qs);
   }
 
@@ -28,13 +31,14 @@ class URLFormat {
       return;
     }
 
+    // delete key from qs object
     delete this.qs[key];
 
+    // update querystring
     this.url.search = querystring.stringify(this.qs);
   }
 
   toString() {
-
     return URL.format(this.url);
   }
 }
