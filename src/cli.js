@@ -28,6 +28,14 @@ if (!argv.aid) {
   throw new Error('aid is not specified');
 }
 
+if (!argv.extract) {
+  throw new Error('extract is not specified');
+}
+
+if (argv.extract && !fs.existsSync(path.resolve(argv.extract))) {
+  throw new Error(`${argv.extract} does not exist`);
+}
+
 let template = new Template();
 if (argv.template && fs.existsSync(path.resolve(argv.template))) {
   template.setTemplatePath(argv.template);
@@ -49,6 +57,8 @@ request(url, (error, response, body) => {
   }
 
   let dataFormat = new DataFormat(body);
+  dataFormat.setDefinitionPath(argv.extract);
+
   let object = dataFormat.extract();
   object.url = urlFormat.toString();
 
