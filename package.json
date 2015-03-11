@@ -1,0 +1,31 @@
+{
+  "name": "affillink",
+  "version": "0.1.0",
+  "description": "Affiliate link generator",
+  "scripts": {
+    "postinstall": "gulp build",
+    "watch": "gulp watch",
+    "build": "gulp build"
+  },
+  "bin": {
+    "affillink": "lib/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1000ch/affilink.git"
+  },
+  "author": "1000ch",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "minimist": "^1.1.1",
+    "mustache": "^1.1.0",
+    "request": "^2.53.0",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-eslint": "^0.6.0"
+  }
+}
