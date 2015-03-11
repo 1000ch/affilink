@@ -25,11 +25,11 @@ if (!validUrl.isUri(url)) {
 }
 
 if (!argv.aid) {
-  throw new Error('aid is not specified');
+  throw new Error('--aid is not specified');
 }
 
 if (!argv.extract) {
-  throw new Error('extract is not specified');
+  throw new Error('--extract is not specified');
 }
 
 if (argv.extract && !fs.existsSync(path.resolve(argv.extract))) {
