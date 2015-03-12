@@ -1,6 +1,6 @@
 {
-  "name": "affillink",
-  "version": "0.1.0",
+  "name": "affilink",
+  "version": "0.1.3",
   "description": "Affiliate link generator",
   "scripts": {
     "postinstall": "gulp build",
@@ -8,7 +8,7 @@
     "build": "gulp build"
   },
   "bin": {
-    "affillink": "lib/cli.js"
+    "affilink": "bin/affilink"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,7 @@
     "minimist": "^1.1.1",
     "mustache": "^1.1.0",
     "request": "^2.53.0",
-    "valid-url": "^1.0.9"
-  },
-  "devDependencies": {
+    "valid-url": "^1.0.9",
     "gulp": "^3.8.11",
     "gulp-babel": "^4.0.0",
     "gulp-eslint": "^0.6.0"
