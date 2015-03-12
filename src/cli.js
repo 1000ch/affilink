@@ -40,7 +40,7 @@ let template = new Template();
 if (argv.template && fs.existsSync(path.resolve(argv.template))) {
   template.setTemplatePath(argv.template);
 } else {
-  template.setTemplatePath('./default.mustache');
+  template.setTemplatePath(path.join(__dirname, '../default.mustache'));
 }
   
 let urlFormat = new URLFormat(url);
