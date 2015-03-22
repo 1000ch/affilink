@@ -8,6 +8,21 @@ class DataFormat {
     this.$ = cheerio.load(html);
     this.extractDefinition = new Map();
   }
+
+  setDefinition(definition = '') {
+
+    let definitions;
+
+    try {
+      definitions = JSON.parse(definition.toString());
+    } catch (error) {
+      throw error;
+    }
+
+    definitions.forEach((definition) => {
+      this.extractDefinition.set(definition.key, definition.value);
+    });
+  }
   
   setDefinitionPath(p = '') {
 
@@ -22,17 +37,7 @@ class DataFormat {
       encoding: 'utf8'
     });
 
-    let definitions;
-
-    try {
-      definitions = JSON.parse(buffer.toString());
-    } catch (error) {
-      throw error;
-    }
-
-    definitions.forEach((definition) => {
-      this.extractDefinition.set(definition.key, definition.value);
-    });
+    this.setDefinition(buffer.toString());
   }
 
   extract() {

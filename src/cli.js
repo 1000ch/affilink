@@ -2,6 +2,9 @@
 
 "use strict";
 
+const fs       = require('fs');
+const path     = require('path');
+
 const minimist = require('minimist');
 const validUrl = require('valid-url');
 const Affilink = require('./affilink');
@@ -31,7 +34,26 @@ if (!argv.extract) {
   process.exit(1);
 }
 
-let affilink = new Affilink(argv.aid, argv.extract, argv.template);
+if (argv.extract && !fs.existsSync(path.resolve(argv.extract))) {
+  console.error(new Error(`${argv.extract} does not exist`));
+  process.exit(1);
+}
+
+if (argv.template && !fs.existsSync(path.resolve(argv.template))) {
+  console.error(new Error(`${argv.template} does not exist`));
+  process.exit(1);
+} else {
+  argv.template = path.join(__dirname, '../default.mustache');
+}
+
+let extract = path.resolve(argv.extract);
+let template = path.resolve(argv.template);
+
+let affilink = new Affilink(
+  argv.aid,
+  fs.readFileSync(extract).toString(),
+  fs.readFileSync(template).toString()
+);
 
 affilink.get(url).then(
   (string) => console.log(string),

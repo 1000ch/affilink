@@ -20,19 +20,11 @@ class Affilink {
       throw new Error('extract is not specified');
     }
 
-    if (extract && !fs.existsSync(path.resolve(extract))) {
-      throw new Error(`${extract} does not exist`);
-    }
-
     this.template = new Template();
     this.aid = aid;
     this.extract = extract;
 
-    if (template && fs.existsSync(path.resolve(template))) {
-      this.template.setTemplatePath(template);
-    } else {
-      this.template.setTemplatePath(path.join(__dirname, '../default.mustache'));
-    }
+    this.template.setTemplate(template);
   }
 
   get(url = '') {
@@ -56,7 +48,7 @@ class Affilink {
         }
 
         let dataFormat = new DataFormat(body);
-        dataFormat.setDefinitionPath(this.extract);
+        dataFormat.setDefinition(this.extract);
 
         let object = dataFormat.extract();
         object.url = urlFormat.toString();

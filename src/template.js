@@ -8,6 +8,10 @@ class Template {
     this.template = template;
   }
 
+  setTemplate(template = '') {
+    this.template = template;
+  }
+
   setTemplatePath(p = '') {
 
     let absolutePath = path.resolve(p);
@@ -21,7 +25,7 @@ class Template {
       encoding: 'utf8'
     });
     
-    this.template = buffer.toString();
+    this.setTemplate(buffer.toString());
   }
 
   render(data = {}) {
