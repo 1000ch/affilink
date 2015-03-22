@@ -1,7 +1,8 @@
 {
   "name": "affilink",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Affiliate link generator",
+  "main": "lib/affilink.js",
   "scripts": {
     "postinstall": "gulp build",
     "watch": "gulp watch",
